@@ -80,18 +80,19 @@ function Login({ onBack, initialRole = "parent" }) {
 
           {role === "admin" ? (
             <div className="admin-note">
-              <p>
-                Sign in with Google using <strong>{ADMIN_EMAILS || "aarushkumar2178@gmail.com"}</strong>.
-              </p>
+              {/* <p>
+                Sign in with Google using <strong>{"Admin Email" }</strong>.
+              </p> */}
               <ol className="plain-list">
-                <li>Choose Admin above.</li>
-                <li>Continue with Google.</li>
-                <li>Pick that Gmail account — not another Google account.</li>
-                <li>The admin desk opens after Google confirms the email.</li>
+                {/* <li>Choose Admin above .</li> */}
+                {/* <li>Continue with Google.</li> */}
+                {/* <li>Pick that Gmail account — not another Google account.</li>
+                <li>The admin desk opens after Google confirms the email.</li> */}
+                <h2>Only for Admin</h2>
               </ol>
-              <p className="muted">
+              {/* <p className="muted">
                 Any other Google account will open as a parent, not as admin.
-              </p>
+              </p> */}
             </div>
           ) : null}
 
