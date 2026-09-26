@@ -3,7 +3,7 @@ import SiteNav from "./SiteNav";
 import Photo from "./Photo";
 import { getApprovedTeachers, submitContactMessage } from "../lib/api";
 import { supabase } from "../lib/supabase";
-import { SITE_NAME, SITE_TAGLINE, SUPPORT_EMAIL, SUPPORT_PHONE } from "../lib/config";
+import { SITE_NAME, SITE_TAGLINE, SUPPORT_EMAIL} from "../lib/config";
 
 const SUBJECTS = [
   "Mathematics",

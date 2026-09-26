@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback,useEffect, useState } from "react";
 import TeacherForm from "./TeacherForm";
 import AppShell from "./AppShell";
 import { getParentRequests, getTeachers } from "../lib/api";
@@ -8,27 +8,31 @@ function TeacherDashboard({ user }) {
   const [listings, setListings] = useState([]);
   const [assignments, setAssignments] = useState([]);
 
-  const load = async () => {
-    const [teachers, requests] = await Promise.all([
-      getTeachers(supabase),
-      getParentRequests(supabase),
-    ]);
-    const mine = teachers.filter(
-      (item) => String(item.email).toLowerCase() === user.email.toLowerCase()
-    );
-    setListings(mine);
-    setAssignments(
-      requests.filter(
-        (item) =>
-          item.status === "Assigned" &&
-          String(item.assignedTeacherEmail).toLowerCase() === user.email.toLowerCase()
-      )
-    );
-  };
+ const load = useCallback(async () => {
+  const [teachers, requests] = await Promise.all([
+    getTeachers(supabase),
+    getParentRequests(supabase),
+  ]);
+
+  const mine = teachers.filter(
+    (item) => String(item.email).toLowerCase() === user.email.toLowerCase()
+  );
+
+  setListings(mine);
+
+  setAssignments(
+    requests.filter(
+      (item) =>
+        item.status === "Assigned" &&
+        String(item.assignedTeacherEmail).toLowerCase() ===
+          user.email.toLowerCase()
+    )
+  );
+}, [user.email]);
 
   useEffect(() => {
     load();
-  }, [user.email]);
+  }, [load]);
 
   const latest = listings[0];
 

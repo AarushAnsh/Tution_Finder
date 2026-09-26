@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback,useEffect, useState } from "react";
 import ParentForm from "./ParentForm";
 import AppShell from "./AppShell";
 import { getParentRequests, getTeachers } from "../lib/api";
@@ -8,23 +8,27 @@ function ParentDashboard({ user }) {
   const [requests, setRequests] = useState([]);
   const [teachers, setTeachers] = useState([]);
 
-  const load = async () => {
-    const [allRequests, allTeachers] = await Promise.all([
-      getParentRequests(supabase),
-      getTeachers(supabase),
-    ]);
-    setRequests(
-      allRequests.filter(
-        (item) =>
-          item.email === user.email || item.userId === user.id
-      )
-    );
-    setTeachers(allTeachers.filter((item) => item.status === "Approved"));
-  };
+ const load = useCallback(async () => {
+  const [allRequests, allTeachers] = await Promise.all([
+    getParentRequests(supabase),
+    getTeachers(supabase),
+  ]);
 
-  useEffect(() => {
-    load();
-  }, [user.email, user.id]);
+  setRequests(
+    allRequests.filter(
+      (item) =>
+        item.email === user.email || item.userId === user.id
+    )
+  );
+
+  setTeachers(
+    allTeachers.filter((item) => item.status === "Approved")
+  );
+}, [user.email, user.id]);
+
+ useEffect(() => {
+  load();
+}, [load]);
 
   const assigned = requests.find((item) => item.status === "Assigned");
 
