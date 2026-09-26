@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" role="img" aria-label="Study books and notes">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f7e7c4"/>
+      <stop offset="1" stop-color="#dceee8"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="560" fill="url(#bg)"/>
+  <rect x="70" y="90" width="660" height="380" rx="28" fill="#fffaf2" stroke="#e6dccb"/>
+  <rect x="120" y="160" width="150" height="220" rx="10" fill="#1b4b73"/>
+  <rect x="290" y="140" width="150" height="240" rx="10" fill="#1d6a6a"/>
+  <rect x="460" y="175" width="150" height="205" rx="10" fill="#e0a106"/>
+  <rect x="160" y="390" width="480" height="18" rx="9" fill="#e6dccb"/>
+  <circle cx="640" cy="150" r="36" fill="#c45c26"/>
+  <text x="400" y="470" text-anchor="middle" font-family="Georgia, serif" font-size="28" fill="#12263a">Subjects for Motihari homes</text>
+</svg>

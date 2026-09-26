@@ -1,8 +1,25 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { render, screen } from "@testing-library/react";
+import App from "./App";
 
-test('renders learn react link', () => {
+jest.mock("./lib/supabase", () => ({
+  supabase: {
+    auth: {
+      getSession: () => Promise.resolve({ data: { session: null } }),
+      onAuthStateChange: () => ({
+        data: { subscription: { unsubscribe: () => {} } },
+      }),
+    },
+  },
+  ensureProfile: () => Promise.resolve({ role: "parent" }),
+  getProfile: () => Promise.resolve(null),
+}));
+
+jest.mock("./lib/api", () => ({
+  getApprovedTeachers: () => Promise.resolve([]),
+  isAdminEmail: () => false,
+}));
+
+test("renders Pathshala home", async () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  expect(await screen.findByText(/Home tutors in Motihari/i)).toBeInTheDocument();
 });
